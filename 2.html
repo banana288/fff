@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bananichiki - Наши Услуги</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Pacifico&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff85a2;
+            --primary-dark: #e76f8c;
+            --secondary-color: #ffb6c1;
+            --dark-color: #555;
+            --light-color: #fff;
+            --gray-color: #fff5f7;
+            --text-color: #444;
+            --kids-color: #ff85a2;
+            --adult-color: #ff85a2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff9fb;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .logo-subtext {
+            font-size: 12px;
+            color: var(--dark-color);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-left: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-list a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--light-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+            padding-bottom: 60px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+            font-size: 36px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Services Sections */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* Adult Services Section */
+        .adult-section {
+            background-color: #f5f9ff;
+            padding: 60px 0;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .adult-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="%23ff85a2" opacity="0.2"/><circle cx="50" cy="50" r="4" fill="%23ff85a2" opacity="0.2"/><circle cx="80" cy="80" r="3" fill="%23ff85a2" opacity="0.2"/><circle cx="30" cy="70" r="2" fill="%23ff85a2" opacity="0.2"/><circle cx="70" cy="30" r="2" fill="%23ff85a2" opacity="0.2"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .adult-title {
+            text-align: center;
+            color: var(--adult-color);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .adult-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--adult-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .adult-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .adult-service-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(255, 133, 162, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid var(--adult-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .adult-service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 133, 162, 0.3);
+        }
+        
+        .adult-service-card h3 {
+            color: var(--adult-color);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .adult-service-card .price {
+            font-size: 24px;
+            color: var(--adult-color);
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .adult-service-card .adult-icon {
+            font-size: 40px;
+            color: var(--adult-color);
+            margin-bottom: 15px;
+        }
+        
+        .adult-add-to-cart-btn {
+            background-color: var(--adult-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .adult-add-to-cart-btn:hover {
+            background-color: #6ab7c5;
+            transform: scale(1.05);
+        }
+        
+        .adult-decoration {
+            position: absolute;
+            font-size: 100px;
+            color: rgba(255, 133, 162, 0.1);
+            z-index: 0;
+        }
+        
+        .adult-decoration-1 {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .adult-decoration-2 {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* Kids Services Section */
+        .kids-section {
+            background-color: #f0f9fa;
+            padding: 60px 0;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kids-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="%23ff85a2" opacity="0.2"/><circle cx="50" cy="50" r="4" fill="%23ff85a2" opacity="0.2"/><circle cx="80" cy="80" r="3" fill="%23ff85a2" opacity="0.2"/><circle cx="30" cy="70" r="2" fill="%23ff85a2" opacity="0.2"/><circle cx="70" cy="30" r="2" fill="%23ff85a2" opacity="0.2"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .kids-title {
+            text-align: center;
+            color: var(--kids-color);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .kids-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--kids-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .kids-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .kids-service-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(255, 133, 162, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid var(--kids-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .kids-service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 133, 162, 0.3);
+        }
+        
+        .kids-service-card h3 {
+            color: var(--kids-color);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .kids-service-card .price {
+            font-size: 24px;
+            color: var(--kids-color);
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .kids-service-card .kids-icon {
+            font-size: 40px;
+            color: var(--kids-color);
+            margin-bottom: 15px;
+        }
+        
+        .kids-add-to-cart-btn {
+            background-color: var(--kids-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .kids-add-to-cart-btn:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        
+        .kids-decoration {
+            position: absolute;
+            font-size: 100px;
+            color: rgba(255, 133, 162, 0.1);
+            z-index: 0;
+        }
+        
+        .kids-decoration-1 {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .kids-decoration-2 {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* Cart Button */
+        #cart-button {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 140, 0.3);
+            transition: all 0.3s;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cart-button:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-color);
+            transition: color 0.3s;
+        }
+
+        .close-button:hover {
+            color: var(--primary-color);
+        }
+
+        #cart-items {
+            list-style: none;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        #cart-total {
+            font-weight: bold;
+            color: var(--primary-dark);
+            font-size: 20px;
+        }
+
+        #checkout-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        #checkout-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Popup Message */
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; bottom: 0; }
+            to { opacity: 1; bottom: 30px; }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #ff85a2 0%, #ffb6c1 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contacts i {
+            margin-right: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffe5e9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .cta-section .section-title {
+            color: white;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                padding: 10px 0;
+            }
+            
+            main {
+                padding-top: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .service-card {
+                padding: 20px;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Bananichiki</span>
+                    <span class="logo-subtext">Стоматология с улыбкой</span>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="2.html" class="active">Услуги</a></li>
+                        <li><a href="3.html">О нас</a></li>
+                        <li><a href="4.html">Контакты</a></li>
+                        <li><a href="5.html">Отзывы</a></li>
+                        <li><a href="6.html" class="cta-button">Запись онлайн</a></li>
+                    </ul>
+                    <div class="footer-contacts">
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Наши услуги</h1>
+            
+            <!-- Adult Services Section -->
+            <section class="adult-section">
+                <div class="container">
+                    <h2 class="adult-title">Услуги для взрослых</h2>
+                    <p class="adult-subtitle">Профессиональный уход за вашей улыбкой. Качественное лечение и комфортные условия.</p>
+                    
+                    <div class="services-container">
+                        <div class="adult-service-card" data-name="Лечение кариеса" data-price="5000">
+                            <div class="adult-icon">
+                                <i class="fas fa-tooth"></i>
+                            </div>
+                            <h3>Лечение кариеса</h3>
+                            <p class="price">5 000 ₽</p>
+                            <p>Безболезненное лечение с гарантией качества</p>
+                            <br>
+                            <button class="adult-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+
+                        <div class="adult-service-card" data-name="Брекет-система" data-price="55000">
+                            <div class="adult-icon">
+                                <i class="fas fa-teeth"></i>
+                            </div>
+                            <h3>Брекет-система</h3>
+                            <p class="price">55 000 ₽</p>
+                            <p>Идеальная улыбка за несколько месяцев</p>
+                            <br>
+                            <button class="adult-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+
+                        <div class="adult-service-card" data-name="Консультация" data-price="0">
+                            <div class="adult-icon">
+                                <i class="fas fa-comment-medical"></i>
+                            </div>
+                            <h3>Консультация</h3>
+                            <p class="price">Бесплатно</p>
+                            <p>Профессиональный осмотр и рекомендации</p>
+                            <br>
+                            <button class="adult-add-to-cart-btn">Записаться</button>
+                        </div>
+
+                        <div class="adult-service-card" data-name="Хирургия" data-price="7000">
+                            <div class="adult-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <h3>Хирургия</h3>
+                            <p class="price">7 000 ₽</p>
+                            <p>Безболезненное удаление зубов любой сложности</p>
+                            <br>
+                            <button class="adult-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+
+                        <div class="adult-service-card" data-name="Чистка" data-price="3500">
+                            <div class="adult-icon">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <h3>Чистка</h3>
+                            <p class="price">3 500 ₽</p>
+                            <p>Профессиональная гигиена полости рта</p>
+                            <br>
+                            <button class="adult-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+
+                        <div class="adult-service-card" data-name="Имплантация" data-price="35000">
+                            <div class="adult-icon">
+                                <i class="fas fa-teeth-open"></i>
+                            </div>
+                            <h3>Имплантация</h3>
+                            <p class="price">35 000 ₽</p>
+                            <p>Восстановление зубов премиум-класса</p>
+                            <br>
+                            <button class="adult-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="adult-decoration adult-decoration-1">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="adult-decoration adult-decoration-2">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </section>
+
+            <!-- Kids Services Section -->
+            <section class="kids-section">
+                <div class="container">
+                    <h2 class="kids-title">Услуги для детей</h2>
+                    <p class="kids-subtitle">Специальные программы для наших маленьких пациентов. Лечение без страха и слез!</p>
+                    
+                    <div class="services-container">
+                        <div class="kids-service-card" data-name="Детская консультация" data-price="0">
+                            <div class="kids-icon">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                            <h3>Детская консультация</h3>
+                            <p class="price">Бесплатно</p>
+                            <p>Первое знакомство с врачом в игровой форме</p>
+                            <br>
+                            <button class="kids-add-to-cart-btn">Записаться</button>
+                        </div>
+                        
+                        <div class="kids-service-card" data-name="Лечение молочных зубов" data-price="3000">
+                            <div class="kids-icon">
+                                <i class="fas fa-baby-carriage"></i>
+                            </div>
+                            <h3>Лечение молочных и постоянных зубов</h3>
+                            <p class="price">3 000 ₽</p>
+                            <p>пломбирование и лечение пульпита</p>
+                            <br>
+                            <button class="kids-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+                        
+                        <div class="kids-service-card" data-name="Герметизация фиссур" data-price="2500">
+                            <div class="kids-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Герметизация фиссур</h3>
+                            <p class="price">2 500 ₽</p>
+                            <p>Защита зубов от кариеса</p>
+                            <br>
+                            <button class="kids-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+                        
+                        <div class="kids-service-card" data-name="Профессиональная чистка для детей" data-price="2000">
+                            <div class="kids-icon">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <h3>Профессиональная чистка</h3>
+                            <p class="price">2 000 ₽</p>
+                            <p>Безопасная чистка с выбором вкуса пасты</p>
+                            <br>
+                            <button class="kids-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+                        
+                        <div class="kids-service-card" data-name="Исправление прикуса" data-price="35000">
+                            <div class="kids-icon">
+                                <i class="fas fa-smile"></i>
+                            </div>
+                            <h3>Исправление прикуса</h3>
+                            <p class="price">35 000 ₽</p>
+                            <p>Детские брекеты и пластинки</p>
+                            <br>
+                            <button class="kids-add-to-cart-btn">Добавить в корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="kids-decoration kids-decoration-1">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="kids-decoration kids-decoration-2">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </section>
+        </div>
+
+     <button id="cart-button" style="top: 100px;">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count">0</span>
+</button>
+
+        <div id="cart-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Ваша корзина</h2>
+                <ul id="cart-items"></ul>
+                <p>Итого: <span id="cart-total">0</span> ₽</p>
+                <button id="checkout-button">Оформить запись</button>
+            </div>
+        </div>
+
+        <div id="popup-message" class="popup">
+            <p>Оплата будет после посещения клиники.</p>
+        </div>
+    </main>
+
+    <!-- CTA секция -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Готовы записаться?</h2>
+            <p>Оставьте заявку и мы подберем удобное время для визита</p>
+            <a href="6.html" class="btn btn-primary">Записаться онлайн</a>
+        </div>
+    </section>
+    <br>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-contacts">
+                <p><i class="fas fa-envelope"></i> Bananchiki12@mail.ru</p>
+                <p><i class="fas fa-phone"></i> +7 (925) 438 56-88</p>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/valeriaaalims?igsh=ZzA1NTYyN3MyZ3c1&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                <a href="https://vk.com/lerkavs"><i class="fab fa-vk"></i></a>
+                <a href="https://wa.me/79254385688"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Bananichiki. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top" title="Наверх">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = [];
+            const cartButton = document.getElementById('cart-button');
+            const cartModal = document.getElementById('cart-modal');
+            const closeButton = document.querySelector('.close-button');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutButton = document.getElementById('checkout-button');
+            const popupMessage = document.getElementById('popup-message');
+            const cartCount = document.querySelector('.cart-count');
+            
+            // Общая функция для добавления в корзину
+            function addToCartHandler(button) {
+                const card = button.closest('.adult-service-card, .kids-service-card');
+                const serviceName = card.dataset.name;
+                const servicePrice = parseInt(card.dataset.price);
+                
+                cart.push({
+                    name: serviceName,
+                    price: servicePrice
+                });
+                
+                updateCart();
+                showPopup();
+            }
+            
+            // Добавление в корзину для взрослых услуг
+            document.querySelectorAll('.adult-add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    addToCartHandler(this);
+                });
+            });
+            
+            // Добавление в корзину для детских услуг
+            document.querySelectorAll('.kids-add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    addToCartHandler(this);
+                });
+            });
+            
+            // Update cart UI
+            function updateCart() {
+                cartItems.innerHTML = '';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${item.name}</span>
+                        <span>${item.price === 0 ? 'Бесплатно' : item.price.toLocaleString() + ' ₽'}</span>
+                    `;
+                    cartItems.appendChild(li);
+                    
+                    if (item.price > 0) {
+                        total += item.price;
+                    }
+                });
+                
+                cartTotal.textContent = total.toLocaleString();
+                cartCount.textContent = cart.length;
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<li style="text-align:center;">Корзина пуста</li>';
+                }
+            }
+            
+            // Show/hide cart modal
+            cartButton.addEventListener('click', function() {
+                cartModal.style.display = 'flex';
+            });
+            
+            closeButton.addEventListener('click', function() {
+                cartModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+            
+            // Checkout button
+            checkoutButton.addEventListener('click', function() {
+                if (cart.length === 0) return;
+                
+                window.location.href = '6.html';
+            });
+            
+            // Show popup message
+            function showPopup() {
+                popupMessage.style.display = 'block';
+                setTimeout(() => {
+                    popupMessage.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Initialize
+            updateCart();
+            
+            // Скрипт для кнопки "Наверх"
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            // Показываем/скрываем кнопку при прокрутке
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            // Плавная прокрутка вверх при клике
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

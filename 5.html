@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bananichiki - Отзывы</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Pacifico&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff85a2;
+            --primary-dark: #e76f8c;
+            --secondary-color: #ffb6c1;
+            --dark-color: #555;
+            --light-color: #fff;
+            --gray-color: #fff5f7;
+            --text-color: #444;
+            --rating-color: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff9fb;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .logo-subtext {
+            font-size: 12px;
+            color: var(--dark-color);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-left: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-list a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--light-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+            padding-bottom: 60px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+            font-size: 36px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 20px 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .review-card {
+            background-color: var(--light-color);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(255, 105, 140, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #ffe5e9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 105, 140, 0.2);
+        }
+
+        .review-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .review-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .review-card:hover .review-image img {
+            transform: scale(1.05);
+        }
+
+        .review-date {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: var(--dark-color);
+        }
+
+        .rating {
+            color: var(--rating-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .review-text {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .author {
+            font-style: italic;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .author::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* Review Form */
+        .review-form {
+            background-color: var(--light-color);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(255, 105, 140, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ffe5e9;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ffe5e9;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 133, 162, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .rating-input {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rating-input i {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .rating-input i.active {
+            color: var(--rating-color);
+        }
+
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
+            display: block;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Popup Message */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: fadeIn 0.5s;
+            text-align: center;
+        }
+
+        .popup i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #ff85a2 0%, #ffb6c1 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contacts i {
+            margin-right: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffe5e9;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-content {
+                padding: 10px 0;
+            }
+            
+            main {
+                padding-top: 80px;
+            }
+            
+            .review-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .review-form {
+                padding: 20px;
+            }
+            
+            button[type="submit"] {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+        }
+        .cta-section {
+    padding: 80px 0;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+}
+
+.cta-section .section-title {
+    color: white;
+}
+
+.cta-section p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+}
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+        /* Стили для кнопки "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Bananichiki</span>
+                    <span class="logo-subtext">Стоматология с улыбкой</span>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="2.html">Услуги</a></li>
+                        <li><a href="3.html">О нас</a></li>
+                        <li><a href="4.html">Контакты</a></li>
+                        <li><a href="5.html" class="active">Отзывы</a></li>
+                        <li><a href="6.html" class="cta-button">Запись онлайн</a></li>
+                    </ul>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <div class="container">
+            <section class="reviews">
+                <h1 class="page-title">Отзывы наших клиентов</h1>
+
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-image">
+                            <img src="pic/5.jpg" alt="Отзыв 1">
+                            <span class="review-date">15.05.2023</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>"Отличная клиника! Все сделали быстро и безболезненно. Ребенок доволен. Рекомендую!"</p>
+                        </div>
+                        <p class="author">Алина Иванова</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-image">
+                            <img src="pic/7" alt="Отзыв 2">
+                            <span class="review-date">22.04.2023</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>"Очень довольна результатом. Врачи внимательные и профессиональные. Особенно понравился подход к детям."</p>
+                        </div>
+                        <p class="author">Елена Петрова</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-image">
+                            <img src="pic/6.jpg" alt="Отзыв 3">
+                            <span class="review-date">10.03.2023</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>"Спасибо большое за красивую улыбку! Всегда мечтала о такой. Теперь улыбаюсь с удовольствием!"</p>
+                        </div>
+                        <p class="author">Анастасия Сидорова</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-image">
+                            <img src="pic/8.jpg" alt="Отзыв 4">
+                            <span class="review-date">28.02.2023</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>"Отличное обслуживание, приятная атмосфера. Буду рекомендовать друзьям. Особенно понравился индивидуальный подход."</p>
+                        </div>
+                        <p class="author">Виктория Кузнецова</p>
+                    </div>
+                </div>
+
+                <h2 class="page-title">Оставить свой отзыв</h2>
+                
+                <div class="review-form">
+                    <form id="reviewForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя:</label>
+                            <input type="text" id="name" name="name" required placeholder="Как вас зовут?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Ваш email (необязательно):</label>
+                            <input type="email" id="email" name="email" placeholder="example@mail.ru">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Оценка:</label>
+                            <div class="rating-input">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="rating" name="rating" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewText">Текст отзыва:</label>
+                            <textarea id="reviewText" name="reviewText" required placeholder="Поделитесь вашими впечатлениями..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photo">Фотография (необязательно):</label>
+                            <input type="file" id="photo" name="photo" accept="image/*">
+                        </div>
+
+                        <button type="submit">Отправить отзыв</button>
+                    </form>
+
+                    <div class="popup" id="popup">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Спасибо за ваш отзыв!<br>Он будет опубликован после проверки.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+<!-- CTA секция -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="section-title animate-fade-in">Готовы записаться?</h2>
+                <p class="animate-fade-up">Оставьте заявку и мы подберем удобное время для визита</p>
+                <a href="6.html" class="btn btn-primary animate-fade-up animate-delay-100">Записаться онлайн</a>
+            </div>
+        </section>
+        <br></br>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-contacts">
+                <p><i class="fas fa-envelope"></i> Bananchiki12@mail.ru</p>
+                <p><i class="fas fa-phone"></i> +7 (925) 438 56-88</p>
+            </div>
+            <div class="social-links">
+         <a href="https://www.instagram.com/valeriaaalims?igsh=ZzA1NTYyN3MyZ3c1&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                <a href="https://vk.com/lerkavs"><i class="fab fa-vk"></i></a>
+                <a href="https://wa.me/79254385688"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Bananichiki. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navList = document.querySelector('.nav-list');
+            
+            if (mobileMenuBtn && navList) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+            
+            // Rating stars
+            const stars = document.querySelectorAll('.rating-input i');
+            const ratingInput = document.getElementById('rating');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-rating');
+                    ratingInput.value = rating;
+                    
+                    stars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas', 'active');
+                        } else {
+                            s.classList.remove('fas', 'active');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const rating = this.getAttribute('data-rating');
+                    
+                    stars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas');
+                        } else {
+                            s.classList.remove('fas');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    const currentRating = ratingInput.value;
+                    
+                    stars.forEach((s, index) => {
+                        if (index < currentRating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas', 'active');
+                        } else {
+                            s.classList.remove('fas', 'active');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+            });
+            
+            // Form submission
+            const reviewForm = document.getElementById('reviewForm');
+            const popup = document.getElementById('popup');
+            
+            if (reviewForm && popup) {
+                reviewForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show popup
+                    popup.style.display = 'block';
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                        reviewForm.reset();
+                        ratingInput.value = 0;
+                        stars.forEach(star => {
+                            star.classList.remove('fas', 'active');
+                            star.classList.add('far');
+                        });
+                    }, 3000);
+                });
+            }
+            
+            // Responsive nav
+            function handleResize() {
+                if (window.innerWidth > 768) {
+                    navList.style.display = 'flex';
+                } else {
+                    navList.style.display = 'none';
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize();
+        });
+    </script>
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top" title="Наверх">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Скрипт для кнопки "Наверх"
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            // Показываем/скрываем кнопку при прокрутке
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            // Плавная прокрутка вверх при клике
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

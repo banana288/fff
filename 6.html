@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bananichiki - Запись на прием</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Pacifico&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff85a2;
+            --primary-dark: #e76f8c;
+            --secondary-color: #ffb6c1;
+            --dark-color: #555;
+            --light-color: #fff;
+            --gray-color: #fff5f7;
+            --text-color: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff9fb;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .logo-subtext {
+            font-size: 12px;
+            color: var(--dark-color);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-left: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-list a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--light-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            min-height: calc(100vh - 180px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+            font-size: 36px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Appointment Section */
+        .appointment-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .form-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(255, 105, 140, 0.1);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid #ffe5e9;
+        }
+
+        .form-card h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffe5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .pet-image {
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 140, 0.2);
+            border: 5px solid white;
+        }
+
+        .bunny-left {
+            align-self: flex-start;
+            margin-right: -50px;
+        }
+
+        .cat-right {
+            align-self: flex-end;
+            margin-left: -50px;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 140, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .success-message i {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #ff85a2 0%, #ffb6c1 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contacts i {
+            margin-right: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffe5e9;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .bunny-left, .cat-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-title {
+                font-size: 30px;
+            }
+            
+            .form-card {
+                padding: 30px 20px;
+            }
+            
+            main {
+                padding-top: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 26px;
+            }
+        }
+      
+        /* Стили для кнопки "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Bananichiki</span>
+                    <span class="logo-subtext">Стоматология с улыбкой</span>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="2.html">Услуги</a></li>
+                        <li><a href="3.html">О нас</a></li>
+                        <li><a href="4.html">Контакты</a></li>
+                        <li><a href="5.html">Отзывы</a></li>
+                        <li><a href="6.html" class="active cta-button">Запись онлайн</a></li>
+                    </ul>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Запись на прием</h1>
+            
+            <div class="appointment-container">
+              
+                
+                <div class="form-card">
+                    <h2>Заполните форму</h2>
+                    <form id="appointment-form">
+                        <div class="form-group">
+                            <label for="fio">ФИО:</label>
+                            <input type="text" id="fio" name="fio" placeholder="Введите ваше полное имя" required>
+                            <p class="error-message" id="fio-error">Пожалуйста, введите ваше ФИО</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Номер телефона:</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-____" required>
+                            <p class="error-message" id="phone-error">Пожалуйста, введите корректный номер телефона</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Электронная почта:</label>
+                            <input type="email" id="email" name="email" placeholder="example@mail.ru">
+                            <p class="error-message" id="email-error">Пожалуйста, введите корректный email</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Желаемая дата:</label>
+                            <input type="date" id="date" name="date" required>
+                            <p class="error-message" id="date-error">Пожалуйста, выберите дату</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Услуга:</label>
+                            <select id="service" name="service" required>
+                                <option value="">Выберите услугу</option>
+                                <option value="Лечение кариеса">Лечение кариеса</option>
+                                <option value="Брекет-система">Брекет-система</option>
+                                <option value="Консультация">Консультация</option>
+                                <option value="Хирургия">Хирургия</option>
+                                <option value="Чистка">Чистка</option>
+                                <option value="Имплантация">Имплантация</option>
+                            </select>
+                            <p class="error-message" id="service-error">Пожалуйста, выберите услугу</p>
+                        </div>
+
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-calendar-check"></i> Записаться
+                        </button>
+                    </form>
+                </div>
+                
+               
+            </div>
+            
+            <div class="success-message" id="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h2>Спасибо за запись!</h2>
+                <p>Мы свяжемся с вами в ближайшее время для подтверждения.</p>
+                <p>Ожидайте звонка по указанному номеру телефона.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- CTA секция -->
+        <section class="cta-section">
+        </section>
+        <br></br>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-contacts">
+                <p><i class="fas fa-envelope"></i> Bananchiki12@mail.ru</p>
+                <p><i class="fas fa-phone"></i> +7 (925) 438 56-88</p>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/valeriaaalims?igsh=ZzA1NTYyN3MyZ3c1&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                <a href="https://vk.com/lerkavs"><i class="fab fa-vk"></i></a>
+                <a href="https://wa.me/79254385688"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Bananichiki. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('appointment-form');
+            const successMessage = document.getElementById('success-message');
+            
+            // Phone input mask
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function(e) {
+                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                e.target.value = !x[2] ? x[1] : x[1] + ' (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+            });
+            
+            // Form validation
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Validate FIO
+                const fio = document.getElementById('fio');
+                const fioError = document.getElementById('fio-error');
+                if (fio.value.trim() === '') {
+                    fioError.style.display = 'block';
+                    fio.style.borderColor = '#ff4757';
+                    isValid = false;
+                } else {
+                    fioError.style.display = 'none';
+                    fio.style.borderColor = '#ffe5e9';
+                }
+                
+                // Validate Phone
+                const phone = document.getElementById('phone');
+                const phoneError = document.getElementById('phone-error');
+                const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+                if (!phoneRegex.test(phone.value)) {
+                    phoneError.style.display = 'block';
+                    phone.style.borderColor = '#ff4757';
+                    isValid = false;
+                } else {
+                    phoneError.style.display = 'none';
+                    phone.style.borderColor = '#ffe5e9';
+                }
+                
+                // Validate Date
+                const date = document.getElementById('date');
+                const dateError = document.getElementById('date-error');
+                if (date.value === '') {
+                    dateError.style.display = 'block';
+                    date.style.borderColor = '#ff4757';
+                    isValid = false;
+                } else {
+                    dateError.style.display = 'none';
+                    date.style.borderColor = '#ffe5e9';
+                }
+                
+                // Validate Service
+                const service = document.getElementById('service');
+                const serviceError = document.getElementById('service-error');
+                if (service.value === '') {
+                    serviceError.style.display = 'block';
+                    service.style.borderColor = '#ff4757';
+                    isValid = false;
+                } else {
+                    serviceError.style.display = 'none';
+                    service.style.borderColor = '#ffe5e9';
+                }
+                
+                // If form is valid, show success message
+                if (isValid) {
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Here you would typically send the form data to the server
+                    const formData = {
+                        fio: fio.value,
+                        phone: phone.value,
+                        email: document.getElementById('email').value,
+                        date: date.value,
+                        service: service.value
+                    };
+                    console.log('Form data:', formData);
+                }
+            });
+        });
+        
+    </script>
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top" title="Наверх">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Скрипт для кнопки "Наверх"
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            // Показываем/скрываем кнопку при прокрутке
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            // Плавная прокрутка вверх при клике
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

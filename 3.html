@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bananichiki - О нас</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Pacifico&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff85a2;
+            --primary-dark: #e76f8c;
+            --secondary-color: #ffb6c1;
+            --dark-color: #555;
+            --light-color: #fff;
+            --gray-color: #fff5f7;
+            --text-color: #444;
+            --radius: 30px;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --light-text: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff9fb;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .logo-subtext {
+            font-size: 12px;
+            color: var(--dark-color);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-left: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-list a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--light-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+            padding-bottom: 60px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+            font-size: 36px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            color: var(--primary-dark);
+            font-size: 32px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .left-content, .right-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .bunny-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(255, 105, 140, 0.1);
+        }
+
+        .text-box {
+            flex: 1;
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(255, 105, 140, 0.1);
+            border: 1px solid #ffe5e9;
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* Doctors Section */
+        .doctors-section {
+            padding: 60px 0;
+            background-color: var(--gray-color);
+            margin-top: 60px;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .doctor-card {
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 105, 140, 0.2);
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            padding: 20px;
+        }
+
+        .doctor-name {
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .doctor-specialty {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .doctor-bio {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .doctor-experience {
+            font-size: 13px;
+            color: var(--dark-color);
+            font-style: italic;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #ff85a2 0%, #ffb6c1 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contacts i {
+            margin-right: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffe5e9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .cta-section .section-title {
+            color: white;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .left-content, .right-content {
+                flex-direction: column;
+            }
+            
+            .bunny-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .header-content {
+                padding: 10px 0;
+            }
+            
+            main {
+                padding-top: 80px;
+            }
+
+            .doctors-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+            
+            .text-box {
+                padding: 20px;
+                font-size: 16px;
+            }
+
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+     
+        /* Стили для кнопки "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Bananichiki</span>
+                    <span class="logo-subtext">Стоматология с улыбкой</span>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="2.html">Услуги</a></li>
+                        <li><a href="3.html" class="active">О нас</a></li>
+                        <li><a href="4.html">Контакты</a></li>
+                        <li><a href="5.html">Отзывы</a></li>
+                        <li><a href="6.html" class="cta-button">Запись онлайн</a></li>
+                    </ul>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="about">
+                <h1 class="page-title">О нас</h1>
+                <p class="tagline">Теперь все хорошо! Почему? Потому что ТВОЯ КЛИНИКА ЗДЕСЬ!</p>
+
+                <div class="content-container">
+                    <div class="left-content">
+                        <img src="pic/7.7" alt="Cute Bunny Left" class="bunny-image">
+                        <div class="text-box">
+                            <p>Добро пожаловать в нашу стоматологическую клинику — место, где забота о здоровье и красоте вашей улыбки стоит на первом месте!
+С 2023 года мы работаем в Москве и оказываем профессиональные стоматологические услуги для всей семьи. За это время нам доверили свои улыбки тысячи пациентов, и мы гордимся тем, что многие из них становятся нашими постоянными клиентами.</p>
+                        </div>
+                    </div>
+
+                    <div class="right-content">
+                        <div class="text-box">
+                            <p>Знаем вас kak свои 32, ведь это BANANCHIKI. Мы современная стоматология и работаем со всеми методиками коррекции и лечения заболеваний зубов и полости рта. Действуем мягко, деликатно, эффективно и совершенно безболезненно.
+                                Наша миссия — сделать стоматологическую помощь доступной, понятной и максимально комфортной. Мы уверены, что лечение зубов может быть приятным — приходите и убедитесь в этом сами!
+                              
+                            </p>
+                        </div>
+                        <img src="pic/3.3" alt="Cute Bunny Right" class="bunny-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Наши врачи -->
+            <section class="doctors-section">
+                <h2 class="section-title">Наши врачи</h2>
+                <div class="doctors-grid">
+                    <div class="doctor-card">
+                        <img src="pic/11.jpg" alt="Доктор Иванова" class="doctor-image">
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Анна Иванова</h3>
+                            <span class="doctor-specialty">Ортодонт</span>
+                            <p class="doctor-bio">Специалист по исправлению прикуса и выравниванию зубов. Использует современные брекет-системы и элайнеры.</p>
+                            <p class="doctor-experience">Опыт работы: 6 лет</p>
+                        </div>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="pic/10.jpg" alt="Доктор Петров" class="doctor-image">
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Максим Петров</h3>
+                            <span class="doctor-specialty">Хирург-имплантолог</span>
+                            <p class="doctor-bio">Проводит операции любой сложности, включая костную пластику и одномоментную имплантацию.</p>
+                            <p class="doctor-experience">Опыт работы: 15 лет</p>
+                        </div>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="pic/12.jpg" alt="Доктор Сидорова" class="doctor-image">
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Елена Сидорова</h3>
+                            <span class="doctor-specialty">Терапевт-эндодонтист</span>
+                            <p class="doctor-bio">Специалист по лечению каналов зубов под микроскопом. Сохраняет даже самые сложные зубы.</p>
+                            <p class="doctor-experience">Опыт работы: 10 лет</p>
+                        </div>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="pic/13.jpg" alt="Доктор Козлов" class="doctor-image">
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Дмитрий Козлов</h3>
+                            <span class="doctor-specialty">Детский стоматолог</span>
+                            <p class="doctor-bio">Находит подход к каждому ребенку. Лечение проходит без страха и слез с использованием седации.</p>
+                            <p class="doctor-experience">Опыт работы: 8 лет</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- CTA секция -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Готовы записаться?</h2>
+            <p class="animate-fade-up">Оставьте заявку и мы подберем удобное время для визита</p>
+            <a href="6.html" class="btn btn-primary animate-fade-up animate-delay-100">Записаться онлайн</a>
+        </div>
+    </section>
+    <br></br>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-contacts">
+                <p><i class="fas fa-envelope"></i> Bananchiki12@mail.ru</p>
+                <p><i class="fas fa-phone"></i> +7 (925) 438 56-88</p>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/valeriaaalims?igsh=ZzA1NTYyN3MyZ3c1&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                <a href="https://vk.com/lerkavs"><i class="fab fa-vk"></i></a>
+                <a href="https://wa.me/79254385688"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Bananichiki. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality can be added here
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navList = document.querySelector('.nav-list');
+            
+            if (mobileMenuBtn && navList) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+            
+            // Responsive adjustments for nav list
+            function handleResize() {
+                if (window.innerWidth > 768) {
+                    navList.style.display = 'flex';
+                } else {
+                    navList.style.display = 'none';
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize();
+        });
+    </script>
+    
+</body>
+</html>
